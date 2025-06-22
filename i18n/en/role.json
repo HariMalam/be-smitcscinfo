@@ -1,0 +1,9 @@
+{
+  "CREATED": "Role was created successfully.",
+  "LISTED": "Roles fetched successfully.",
+  "FOUND": "Role found successfully.",
+  "UPDATED": "Role was updated successfully.",
+  "DELETED": "Role was deleted successfully.",
+  "NOT_FOUND": "Role not found.",
+  "ALREADY_EXISTS": "A role with this name already exists."
+}
