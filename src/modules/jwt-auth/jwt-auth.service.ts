@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-import { AppConfig, JwtConfig } from 'src/modules/config/configuration';
+import { AppConfig, JwtConfig } from '../../modules/config/configuration';
 
 @Injectable()
 export class JwtAuthService {

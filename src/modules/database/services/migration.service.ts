@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { AppConfig } from 'src/modules/config/configuration';
+import { AppConfig } from '../../../modules/config/configuration';
 import { AppDataSource } from '../data-source';
 
 @Injectable()

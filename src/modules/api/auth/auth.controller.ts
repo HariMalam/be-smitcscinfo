@@ -5,7 +5,7 @@ import { SendOtpDto } from './dto/send-otp.dto';
 import { AuthService } from './services/auth.service';
 import { OtpService } from './services/otp.service';
 import { RegisterDto } from './dto/register.dto';
-import { ControllerResponse } from 'src/common/interfaces/api-response.interface';
+import { ControllerResponse } from '../../../common/interfaces/api-response.interface';
 import { loginDto } from './dto/login.dto';
 
 @ApiTags('Auth')

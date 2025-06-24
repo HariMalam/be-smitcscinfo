@@ -6,7 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Otp } from './entities/otp.entity';
 import { AuthService } from './services/auth.service';
 import { OtpService } from './services/otp.service';
-import { JwtAuthModule } from 'src/modules/jwt-auth/jwt-auth.module';
+import { JwtAuthModule } from '../../../modules/jwt-auth/jwt-auth.module';
 import { User } from '../user/entites/user.entity';
 
 @Module({

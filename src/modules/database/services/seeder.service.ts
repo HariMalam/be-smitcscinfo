@@ -5,7 +5,7 @@ import { Role } from '../../api/role/entities/role.entity';
 import { User } from '../../api/user/entites/user.entity';
 import { ConfigService } from '@nestjs/config';
 import { AppConfig, superAdminConfig } from '../../config/configuration';
-import { hashValue } from 'src/common/utils/bcrypt.util';
+import { hashValue } from '../../../common/utils/bcrypt.util';
 
 @Injectable()
 export class SeederService {

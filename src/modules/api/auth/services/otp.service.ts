@@ -1,12 +1,12 @@
 import { ConflictException, Injectable, Logger } from '@nestjs/common';
 import { LessThan, Repository } from 'typeorm';
 import { Otp } from '../entities/otp.entity';
-import { MailerService } from 'src/modules/mailer/mailer.service';
+import { MailerService } from '../../../../modules/mailer/mailer.service';
 import { InjectRepository } from '@nestjs/typeorm';
-import { generateOtp } from 'src/common/utils/otp.util';
-import { compareValue, hashValue } from 'src/common/utils/bcrypt.util';
+import { generateOtp } from '../../../../common/utils/otp.util';
+import { compareValue, hashValue } from '../../../../common/utils/bcrypt.util';
 import { User } from '../../user/entites/user.entity';
-import { I18nServiceWrapper } from 'src/modules/i18n/i18n.service';
+import { I18nServiceWrapper } from '../../../../modules/i18n/i18n.service';
 
 @Injectable()
 export class OtpService {

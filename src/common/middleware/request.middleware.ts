@@ -1,4 +1,3 @@
-// src/common/middleware/request-id.middleware.ts
 import { v4 as uuidv4 } from 'uuid';
 import { Request, Response, NextFunction } from 'express';
 import { LanguageEnum } from '../../modules/i18n/enums/language.enum';
