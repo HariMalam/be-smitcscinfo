@@ -7,6 +7,7 @@ const configuration = () => ({
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     name: process.env.DB_NAME,
+    ssl: process.env.DB_SSL === 'true',
   },
   jwt: {
     secret: process.env.JWT_SECRET,
@@ -24,10 +25,15 @@ const configuration = () => ({
     password: process.env.SUPER_ADMIN_PASSWORD,
     name: process.env.SUPER_ADMIN_NAME,
   },
+  redis: {
+    url: process.env.REDIS_URL,
+    tls: process.env.REDIS_TLS === 'true',
+  },
 });
 
 export type AppConfig = ReturnType<typeof configuration>;
 export type EmailConfig = AppConfig['email'];
 export type JwtConfig = AppConfig['jwt'];
 export type superAdminConfig = AppConfig['superAdmin'];
+export type redisConfig = AppConfig['redis'];
 export default configuration;

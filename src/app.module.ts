@@ -9,6 +9,7 @@ import { MailerModule } from './modules/mailer/mailer.module';
 import { JwtAuthModule } from './modules/jwt-auth/jwt-auth.module';
 import { ApiModule } from './modules/api/api.module';
 import { CronModule } from './modules/cron/cron.module';
+import { RedisModule } from './modules/redis/redis.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { CronModule } from './modules/cron/cron.module';
     JwtAuthModule,
     ApiModule,
     CronModule,
+    RedisModule,
   ],
   controllers: [AppController],
   providers: [AppService],

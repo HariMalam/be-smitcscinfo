@@ -8,6 +8,7 @@ import { AuthService } from './services/auth.service';
 import { OtpService } from './services/otp.service';
 import { JwtAuthModule } from '../../../modules/jwt-auth/jwt-auth.module';
 import { User } from '../user/entites/user.entity';
+import { GoogleAuthModule } from '../google-auth/google-auth.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { User } from '../user/entites/user.entity';
     MailerModule,
     TypeOrmModule.forFeature([Otp, User]),
     JwtAuthModule,
+    GoogleAuthModule,
   ],
   controllers: [AuthController],
   providers: [AuthService, OtpService],

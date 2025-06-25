@@ -8,6 +8,7 @@ export const envSchema = z.object({
   DB_USERNAME: z.string(),
   DB_PASSWORD: z.string(),
   DB_NAME: z.string(),
+  DB_SSL: z.string(),
   JWT_SECRET: z.string(),
   JWT_EXPIRES_IN: z.string(),
   EMAIL_USER: z.string(),
@@ -18,4 +19,6 @@ export const envSchema = z.object({
   SUPER_ADMIN_NAME: z.string(),
   RUN_MIGRATIONS: z.string(),
   RUN_SEEDERS: z.string(),
+  REDIS_URL: z.string(),
+  REDIS_TLS: z.string(),
 });

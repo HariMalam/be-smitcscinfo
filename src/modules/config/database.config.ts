@@ -12,6 +12,9 @@ export const getTypeOrmConfig = (
   database: configService.get<string>('db.name'),
   entities: [__dirname + '/../**/*.entity.{ts,js}'],
   migrations: [__dirname + '/../database/migrations/*.{ts,js}'],
+  ssl: configService.get<boolean>('db.ssl')
+    ? { rejectUnauthorized: false }
+    : false,
   synchronize: false,
   logging: false,
 });

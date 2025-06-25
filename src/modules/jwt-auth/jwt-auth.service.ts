@@ -18,7 +18,6 @@ export class JwtAuthService {
 
   // ✅ Sign access token
   signAccessToken(payload: object): string {
-    console.log('Signing JWT with payload:', payload);
     const token = this.jwtService.sign(payload, {
       secret: this.jwtConfig.secret,
       expiresIn: this.jwtConfig.expiresIn,

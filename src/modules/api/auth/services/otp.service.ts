@@ -7,6 +7,8 @@ import { generateOtp } from '../../../../common/utils/otp.util';
 import { compareValue, hashValue } from '../../../../common/utils/bcrypt.util';
 import { User } from '../../user/entites/user.entity';
 import { I18nServiceWrapper } from '../../../../modules/i18n/i18n.service';
+import { SendOtpDto } from '../dto/send-otp.dto';
+import { OtpType } from '../../../../common/enums/otp-type.emum';
 
 @Injectable()
 export class OtpService {
@@ -21,31 +23,55 @@ export class OtpService {
     private readonly i18n: I18nServiceWrapper,
   ) {}
 
-  async sendOtp(email: string): Promise<void> {
-    const existingUser = await this.userRepository.findBy({ email });
-    if (existingUser.length > 0) {
-      throw new ConflictException(this.i18n.t('auth', 'USER_ALREADY_EXISTS'));
-    }
+  async sendOtp(sendOtpDto: SendOtpDto): Promise<void> {
     const otp = generateOtp();
     const hashedOtp = await hashValue(otp);
 
-    await this.mailerService.sendOtpEmail(email, otp);
+    if (sendOtpDto.type === OtpType.VERIFY_EMAIL) {
+      await this.sendVerifyEmailOtp(sendOtpDto.email, otp);
+    }
+
+    if (sendOtpDto.type === OtpType.RESET_PASSWORD) {
+      await this.sendResetPasswordOtp(sendOtpDto.email, otp);
+    }
 
     const expiresAt = new Date(Date.now() + 5 * 60 * 1000);
-    const existingOtp = await this.otpRepository.findOne({ where: { email } });
+    const existingOtp = await this.otpRepository.findOne({
+      where: { email: sendOtpDto.email },
+    });
 
     if (existingOtp) {
       existingOtp.otp = hashedOtp;
       existingOtp.expiresAt = expiresAt;
       await this.otpRepository.save(existingOtp);
-    } else {
-      const otpEntity = this.otpRepository.create({
-        email,
-        otp: hashedOtp,
-        expiresAt,
-      });
-      await this.otpRepository.save(otpEntity);
+      return;
     }
+    const otpEntity = this.otpRepository.create({
+      email: sendOtpDto.email,
+      otp: hashedOtp,
+      expiresAt,
+    });
+    await this.otpRepository.save(otpEntity);
+  }
+
+  async sendVerifyEmailOtp(email: string, otp: string): Promise<void> {
+    const existingUser = await this.userRepository.findBy({
+      email,
+    });
+    if (existingUser.length > 0) {
+      throw new ConflictException(this.i18n.t('auth', 'USER_ALREADY_EXISTS'));
+    }
+    await this.mailerService.sendResetPasswordEmail(email, otp);
+  }
+
+  async sendResetPasswordOtp(email: string, otp: string): Promise<void> {
+    const existingUser = await this.userRepository.findBy({
+      email: email,
+    });
+    if (existingUser.length === 0) {
+      throw new ConflictException(this.i18n.t('user', 'NOT_FOUND'));
+    }
+    await this.mailerService.sendVerifyEmailOtp(email, otp);
   }
 
   async verifyOtp(email: string, otp: string): Promise<boolean> {

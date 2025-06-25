@@ -23,8 +23,8 @@ export class MailerService {
     });
   }
 
-  async sendOtpEmail(to: string, otp: string): Promise<void> {
-    const templatePath = join(process.cwd(), 'templates', 'otp-email.hbs');
+  async sendVerifyEmailOtp(to: string, otp: string): Promise<void> {
+    const templatePath = join(process.cwd(), 'templates', 'verify-email.hbs');
     const source = await readFile(templatePath, 'utf-8');
 
     const compiled = handlebars.compile(source);
@@ -37,6 +37,28 @@ export class MailerService {
       from: `"No Reply" <${this.user}>`,
       to,
       subject: 'Your OTP Code',
+      html,
+    };
+    await this.transporter.sendMail(mailOptions);
+  }
+
+  async sendResetPasswordEmail(to: string, otp: string): Promise<void> {
+    const templatePath = join(
+      process.cwd(),
+      'templates',
+      'reset-password-email.hbs',
+    );
+    const source = await readFile(templatePath, 'utf-8');
+    const compiled = handlebars.compile(source);
+    const html = compiled({
+      otp,
+      year: new Date().getFullYear(),
+    });
+
+    const mailOptions = {
+      from: `"No Reply" <${this.user}>`,
+      to,
+      subject: 'Reset Your Password',
       html,
     };
     await this.transporter.sendMail(mailOptions);
