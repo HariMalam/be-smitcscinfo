@@ -62,7 +62,9 @@ export class RoleController {
 
   @Get(':id')
   @HttpCode(HttpStatus.OK)
-  async findOne(@Param('id', new ParseUUIDPipe()) id: string) {
+  async findOne(
+    @Param('id', new ParseUUIDPipe()) id: string,
+  ): Promise<ControllerResponse> {
     const role = await this.roleService.findOne(id);
     return {
       message: this.i18n.t('role', 'FOUND'),
@@ -76,7 +78,7 @@ export class RoleController {
   async update(
     @Param('id', new ParseUUIDPipe()) id: string,
     @Body() updateRoleDto: UpdateRoleDto,
-  ) {
+  ): Promise<ControllerResponse> {
     const role = await this.roleService.update(id, updateRoleDto);
     return {
       message: this.i18n.t('role', 'UPDATED'),
