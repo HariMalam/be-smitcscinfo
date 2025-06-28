@@ -1,5 +1,5 @@
 {
-  "CREATED": "User {name} was created successfully.",
-  "DELETED": "User {name} was deleted.",
+  "CREATED": "વપરાશકર્તા સફળતાપૂર્વક બનાવાયો.",
+  "DELETED": "વપરાશકર્તા સફળતાપૂર્વક ડિલીટ થયો.",
   "NOT_FOUND": "વપરાશકર્તા મળ્યો નથી."
 }

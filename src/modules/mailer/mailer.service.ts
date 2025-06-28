@@ -4,15 +4,16 @@ import * as handlebars from 'handlebars';
 import { join } from 'path';
 import { readFile } from 'fs/promises';
 import { ConfigService } from '@nestjs/config';
-import { EmailConfig } from '../config/configuration';
+import { AppConfig } from '../config/configuration';
 
 @Injectable()
 export class MailerService {
   private readonly transporter: nodemailer.Transporter;
   private readonly user: string;
 
-  constructor(private readonly configService: ConfigService) {
-    const { user, pass } = this.configService.getOrThrow<EmailConfig>('email');
+  constructor(private readonly configService: ConfigService<AppConfig>) {
+    const { user, pass } =
+      this.configService.getOrThrow<AppConfig['email']>('email');
     this.user = user || '';
     this.transporter = nodemailer.createTransport({
       service: 'gmail',

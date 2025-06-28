@@ -1,16 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-import { AppConfig, JwtConfig } from '../../modules/config/configuration';
+import { AppConfig } from '../../modules/config/configuration';
 
 @Injectable()
 export class JwtAuthService {
-  private readonly jwtConfig: JwtConfig;
+  private readonly jwtConfig: AppConfig['jwt'];
   constructor(
     private readonly jwtService: JwtService,
     private readonly configService: ConfigService<AppConfig>,
   ) {
-    this.jwtConfig = this.configService.get<JwtConfig>('jwt') ?? {
+    this.jwtConfig = this.configService.get<AppConfig['jwt']>('jwt') ?? {
       secret: undefined,
       expiresIn: undefined,
     };

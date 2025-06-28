@@ -17,9 +17,12 @@ import { UpdateRoleDto } from './dto/update-role.dto';
 import { I18nServiceWrapper } from '../../i18n/i18n.service';
 import { ControllerResponse } from '../../../common/interfaces/api-response.interface';
 import { PaginationQueryDto } from '../../../common/dto/pagination-query.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { Roles } from '../../../common/decorators/roles.decorator';
+import { Role } from '../../../common/enums/roles.enum';
 
 @ApiTags('Roles')
+@ApiBearerAuth()
 @Controller('roles')
 export class RoleController {
   constructor(
@@ -28,6 +31,7 @@ export class RoleController {
   ) {}
 
   @Post()
+  @Roles(Role.SUPER_ADMIN)
   @HttpCode(HttpStatus.CREATED)
   async create(
     @Body() createRoleDto: CreateRoleDto,
@@ -40,6 +44,7 @@ export class RoleController {
   }
 
   @Get()
+  @Roles(Role.SUPER_ADMIN, Role.ADMIN)
   @HttpCode(HttpStatus.OK)
   async findAll(
     @Query() query: PaginationQueryDto,
@@ -66,6 +71,7 @@ export class RoleController {
   }
 
   @Put(':id')
+  @Roles(Role.SUPER_ADMIN)
   @HttpCode(HttpStatus.OK)
   async update(
     @Param('id', new ParseUUIDPipe()) id: string,
@@ -79,6 +85,7 @@ export class RoleController {
   }
 
   @Delete(':id')
+  @Roles(Role.SUPER_ADMIN)
   @HttpCode(HttpStatus.OK)
   async remove(
     @Param('id', new ParseUUIDPipe()) id: string,

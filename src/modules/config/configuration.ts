@@ -32,8 +32,4 @@ const configuration = () => ({
 });
 
 export type AppConfig = ReturnType<typeof configuration>;
-export type EmailConfig = AppConfig['email'];
-export type JwtConfig = AppConfig['jwt'];
-export type superAdminConfig = AppConfig['superAdmin'];
-export type redisConfig = AppConfig['redis'];
 export default configuration;

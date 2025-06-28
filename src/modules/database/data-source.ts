@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import { DataSource } from 'typeorm';
 import { ConfigService } from '@nestjs/config';
-import configuration from '../config/configuration'; // adjust path if outside src
+import configuration from '../config/configuration';
 import { getTypeOrmConfig } from '../config/database.config';
 import { envSchema } from '../config/validation.schema';
 

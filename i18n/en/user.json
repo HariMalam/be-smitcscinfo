@@ -1,5 +1,5 @@
 {
-  "CREATED": "User {name} was created successfully.",
-  "DELETED": "User {name} was deleted.",
+  "CREATED": "User created successfully.",
+  "DELETED": "User deleted successfully.",
   "NOT_FOUND": "User not found."
 }

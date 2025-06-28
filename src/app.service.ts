@@ -7,7 +7,7 @@ export class AppService {
   constructor(private readonly i18n: I18nServiceWrapper) {}
   getHello(): ControllerResponse {
     return {
-      message: this.i18n.t('common', 'HELLO_USER', { name: 'user' }),
+      message: this.i18n.t('common', 'WELCOME'),
     };
   }
 }

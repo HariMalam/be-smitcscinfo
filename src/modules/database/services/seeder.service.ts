@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { Role } from '../../api/role/entities/role.entity';
 import { User } from '../../api/user/entites/user.entity';
 import { ConfigService } from '@nestjs/config';
-import { AppConfig, superAdminConfig } from '../../config/configuration';
+import { AppConfig } from '../../config/configuration';
 import { hashValue } from '../../../common/utils/bcrypt.util';
 
 @Injectable()
@@ -46,7 +46,8 @@ export class SeederService {
   }
 
   private async seedSuperAdmin() {
-    const config = this.configService.get<superAdminConfig>('superAdmin');
+    const config =
+      this.configService.get<AppConfig['superAdmin']>('superAdmin');
 
     if (!config) {
       this.logger.warn(

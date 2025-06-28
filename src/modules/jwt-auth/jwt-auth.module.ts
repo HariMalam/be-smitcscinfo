@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
-import { AppConfig, JwtConfig } from '../../modules/config/configuration';
+import { AppConfig } from '../../modules/config/configuration';
 import { ConfigModule as AppConfigModule } from '../config/config.module';
 import { JwtAuthService } from './jwt-auth.service';
 
@@ -11,7 +11,7 @@ import { JwtAuthService } from './jwt-auth.service';
       imports: [AppConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService<AppConfig>) => {
-        const jwt = configService.get<JwtConfig>('jwt');
+        const jwt = configService.get<AppConfig['jwt']>('jwt');
         return {
           secret: jwt?.secret,
           signOptions: {
