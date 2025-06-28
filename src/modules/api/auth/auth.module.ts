@@ -9,17 +9,20 @@ import { OtpService } from './services/otp.service';
 import { JwtAuthModule } from '../../../modules/jwt-auth/jwt-auth.module';
 import { User } from '../user/entites/user.entity';
 import { GoogleAuthModule } from '../google-auth/google-auth.module';
+import { PassportModule } from '@nestjs/passport';
+import { JwtStrategy } from 'src/common/strategies/jwt.strategy';
 
 @Module({
   imports: [
     UserModule,
     MailerModule,
     TypeOrmModule.forFeature([Otp, User]),
+    PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtAuthModule,
     GoogleAuthModule,
   ],
   controllers: [AuthController],
-  providers: [AuthService, OtpService],
+  providers: [AuthService, OtpService, JwtStrategy],
   exports: [AuthService, OtpService],
 })
 export class AuthModule {}

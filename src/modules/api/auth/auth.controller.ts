@@ -9,7 +9,9 @@ import { ControllerResponse } from '../../../common/interfaces/api-response.inte
 import { LoginDto } from './dto/login.dto';
 import { ResetPasswordDto } from './dto/reset-password.dto';
 import { GoogleLoginDto } from './dto/google-login.dto';
+import { Public } from '../../../common/decorators/public.decorator';
 
+@Public()
 @ApiTags('Auth')
 @Controller('auth')
 export class AuthController {

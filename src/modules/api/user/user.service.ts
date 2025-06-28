@@ -36,4 +36,15 @@ export class UserService {
     }
     return await this.userRepository.save(user);
   }
+
+  async findOneById(id: string): Promise<User | null> {
+    const user = await this.userRepository.findOne({
+      where: { id },
+      relations: ['roles'],
+    });
+    if (!user) {
+      return null;
+    }
+    return user;
+  }
 }

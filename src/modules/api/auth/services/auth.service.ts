@@ -44,8 +44,6 @@ export class AuthService {
     const user = await this.userService.create(createUserDto);
     const jwtAuthPayload: JwtAuthPayload = {
       sub: user.id,
-      email: user.email,
-      roles: user.roles.map((role) => role.name),
     };
     return this.jwtAuthService.signAccessToken(jwtAuthPayload);
   }
@@ -86,8 +84,6 @@ export class AuthService {
     }
     const jwtAuthPayload: JwtAuthPayload = {
       sub: user.id,
-      email: user.email,
-      roles: user.roles.map((role) => role.name),
     };
     return this.jwtAuthService.signAccessToken(jwtAuthPayload);
   }
@@ -114,8 +110,6 @@ export class AuthService {
     if (existingUser) {
       const jwtAuthPayload: JwtAuthPayload = {
         sub: existingUser.id,
-        email: existingUser.email,
-        roles: existingUser.roles.map((role) => role.name),
       };
       return this.jwtAuthService.signAccessToken(jwtAuthPayload);
     }
@@ -130,8 +124,6 @@ export class AuthService {
     const user = await this.userService.create(createUserDto);
     const jwtAuthPayload: JwtAuthPayload = {
       sub: user.id,
-      email: user.email,
-      roles: user.roles.map((role) => role.name),
     };
     return this.jwtAuthService.signAccessToken(jwtAuthPayload);
   }
